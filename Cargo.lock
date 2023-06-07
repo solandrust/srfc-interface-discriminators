@@ -1089,6 +1089,7 @@ dependencies = [
  "borsh-derive 0.10.3",
  "solana-program",
  "spl-associated-token-account",
+ "spl-interface-instruction",
  "spl-token",
  "spl-token-2022",
  "winnow",
@@ -1501,6 +1502,63 @@ dependencies = [
 ]
 
 [[package]]
+name = "shank"
+version = "0.0.12"
+source = "git+https://github.com/buffalojoec/shank?branch=joec/interface-discriminators#bfd67bebe70056165725e8c7d2031879fb9c662f"
+dependencies = [
+ "shank_macro",
+]
+
+[[package]]
+name = "shank-example"
+version = "0.1.0"
+dependencies = [
+ "borsh 0.10.3",
+ "borsh-derive 0.10.3",
+ "shank",
+ "solana-program",
+ "spl-associated-token-account",
+ "spl-interface-instruction",
+ "spl-token",
+ "spl-token-2022",
+ "winnow",
+]
+
+[[package]]
+name = "shank_macro"
+version = "0.0.12"
+source = "git+https://github.com/buffalojoec/shank?branch=joec/interface-discriminators#bfd67bebe70056165725e8c7d2031879fb9c662f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "shank_macro_impl",
+ "shank_render",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "shank_macro_impl"
+version = "0.0.12"
+source = "git+https://github.com/buffalojoec/shank?branch=joec/interface-discriminators#bfd67bebe70056165725e8c7d2031879fb9c662f"
+dependencies = [
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "shank_render"
+version = "0.0.1"
+source = "git+https://github.com/buffalojoec/shank?branch=joec/interface-discriminators#bfd67bebe70056165725e8c7d2031879fb9c662f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "shank_macro_impl",
+]
+
+[[package]]
 name = "signature"
 version = "1.6.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1737,6 +1795,33 @@ dependencies = [
  "spl-token",
  "spl-token-2022",
  "thiserror",
+]
+
+[[package]]
+name = "spl-interface-instruction"
+version = "0.1.0"
+dependencies = [
+ "solana-program",
+ "spl-interface-instruction-derive",
+]
+
+[[package]]
+name = "spl-interface-instruction-derive"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "spl-interface-instruction-syn",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "spl-interface-instruction-syn"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
 ]
 
 [[package]]

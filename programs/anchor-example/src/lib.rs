@@ -13,35 +13,47 @@ pub mod anchor_example {
     /// This instruction implements the `token` interface's `mint_to`
     /// instruction and will have discriminator `hash(token:mint_to)[..8]`
     #[interface(token::mint_to)]
-    pub fn my_custom_mint_to(ctx: Context<MintTo>) -> Result<()> {
+    pub fn my_custom_mint_to(
+        ctx: Context<MintTo>,
+        custom_arg_1: String,
+        custom_arg_2: u64,
+    ) -> Result<()> {
         Ok(())
     }
 
     /// This instruction implements the `token` interface's `transfer`
     /// instruction and will have discriminator `hash(token:transfer)[..8]`
     #[interface(token::transfer)]
-    pub fn my_custom_transfer(ctx: Context<Transfer>) -> Result<()> {
+    pub fn my_custom_transfer(
+        ctx: Context<Transfer>,
+        custom_arg_1: Pubkey,
+        custom_arg_2: u32,
+    ) -> Result<()> {
         Ok(())
     }
 
     /// This instruction implements the `token` interface's `burn`
     /// instruction and will have discriminator `hash(token:burn)[..8]`
     #[interface(token::burn)]
-    pub fn my_custom_burn(ctx: Context<Burn>) -> Result<()> {
+    pub fn my_custom_burn(ctx: Context<Burn>, custom_arg_1: Vec<String>) -> Result<()> {
         Ok(())
     }
 
     /// This instruction implements the `associated_token` interface's `freeze`
     /// instruction and will have discriminator `hash(token:freeze)[..8]`
     #[interface(associated_token::freeze)]
-    pub fn my_custom_freeze(ctx: Context<Freeze>) -> Result<()> {
+    pub fn my_custom_freeze(
+        ctx: Context<Freeze>,
+        custom_arg_1: Pubkey,
+        custom_arg_2: u32,
+    ) -> Result<()> {
         Ok(())
     }
 
     /// This instruction implements the `associated_token` interface's `thaw`
     /// instruction and will have discriminator `hash(token:thaw)[..8]`
     #[interface(associated_token::thaw)]
-    pub fn my_custom_thaw(ctx: Context<Thaw>) -> Result<()> {
+    pub fn my_custom_thaw(ctx: Context<Thaw>, custom_arg_1: Pubkey) -> Result<()> {
         Ok(())
     }
 }

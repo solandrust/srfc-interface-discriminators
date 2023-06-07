@@ -1,15 +1,16 @@
 [package]
-name = "native-example"
+name = "shank-example"
 version = "0.1.0"
 edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "native_example"
+name = "shank_example"
 
 [dependencies]
 borsh = "0.10.3"
 borsh-derive = "0.10.3"
+shank = { git = "https://github.com/buffalojoec/shank", branch = "joec/interface-discriminators" }
 solana-program = "1.14.12"
 spl-associated-token-account = { version = "1.1.3", features = ["no-entrypoint"] }
 spl-interface-instruction = { version = "0.1.0", path = "../../interface-instruction" }
