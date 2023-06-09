@@ -7,5 +7,8 @@ edition = "2021"
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
+quote = "1.0"
 solana-program = "1.14.12"
 spl-interface-instruction-derive = { version = "0.1.0", path = "./derive" }
+syn = { version = "2.0", features = ["full"] }
+thiserror = "1.0.40"

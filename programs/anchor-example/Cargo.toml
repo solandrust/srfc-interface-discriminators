@@ -18,7 +18,5 @@ default = []
 [dependencies]
 anchor-lang = { git = "https://github.com/buffalojoec/anchor", branch = "joec/interface-discriminators" }
 anchor-spl = { git = "https://github.com/buffalojoec/anchor", branch = "joec/interface-discriminators" }
-borsh = "=0.10.3"
-solana-program = "=1.14.12"
-toml_datetime = "=0.6.1"
-winnow = "=0.4.1"
+borsh = "=0.11"
+solana-program = "=1.14.18"

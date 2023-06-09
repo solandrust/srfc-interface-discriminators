@@ -8,8 +8,7 @@ crate-type = ["cdylib", "lib"]
 name = "native_example"
 
 [dependencies]
-borsh = "0.10.3"
-borsh-derive = "0.10.3"
+borsh = "=0.9.3"
 solana-program = "1.14.12"
 spl-associated-token-account = { version = "1.1.3", features = ["no-entrypoint"] }
 spl-interface-instruction = { version = "0.1.0", path = "../../interface-instruction" }

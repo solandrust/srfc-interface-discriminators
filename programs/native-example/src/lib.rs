@@ -1,6 +1,6 @@
 mod processor;
 
-use solana_program::{entrypoint, pubkey::Pubkey};
+use solana_program::entrypoint;
 use spl_interface_instruction::*;
 
 use crate::processor::process;
