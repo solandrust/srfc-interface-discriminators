@@ -1,7 +1,7 @@
 mod processor;
 
 use solana_program::entrypoint;
-use spl_interface_instruction::*;
+use spl_interface_instructions::*;
 
 use crate::processor::process;
 

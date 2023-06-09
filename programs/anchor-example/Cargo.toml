@@ -20,3 +20,5 @@ anchor-lang = { git = "https://github.com/buffalojoec/anchor", branch = "joec/in
 anchor-spl = { git = "https://github.com/buffalojoec/anchor", branch = "joec/interface-discriminators" }
 borsh = "=0.11"
 solana-program = "=1.14.18"
+toml_datetime = "=0.6.1"
+winnow = "=0.4.1"
