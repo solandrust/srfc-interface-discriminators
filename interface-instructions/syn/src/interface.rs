@@ -152,7 +152,7 @@ impl From<&Type> for RequiredArgType {
 }
 
 /// Evaluates a program's interface instructions against any declared interfaces
-pub fn evaluate_interface_instructions<'i>(
+pub fn evaluate_interface_instructions(
     declared_instructions: Vec<InterfaceInstruction>,
 ) -> Result<(), SplInterfaceError> {
     // Initialize a HashMap to keep track of all declared interfaces
@@ -174,7 +174,7 @@ pub fn evaluate_interface_instructions<'i>(
     }
     // Make sure all declared interfaces have no remaining unmatched instructions
     for x in declared_interfaces.values() {
-        if x.len() > 0 {
+        if !x.is_empty() {
             return Err(SplInterfaceError::InstructionMissing);
         }
     }
@@ -189,13 +189,13 @@ fn process_declared_instruction<I: Interface>(
 ) -> Result<(), SplInterfaceError> {
     match declared_interfaces.get_mut(&declared_ix.interface_namespace) {
         Some(set) => {
-            if set.remove(&declared_ix) == false {
+            if !set.remove(&declared_ix) {
                 return Err(SplInterfaceError::InstructionNotFound);
             }
         }
         None => {
             let mut set = I::instruction_set();
-            if set.remove(&declared_ix) == false {
+            if !set.remove(&declared_ix) {
                 return Err(SplInterfaceError::InstructionNotFound);
             }
             declared_interfaces.insert(declared_ix.interface_namespace, set);

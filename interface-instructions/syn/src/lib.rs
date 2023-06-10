@@ -57,9 +57,10 @@ impl ToTokens for InterfaceInstructionBuilder {
 
 impl From<&InterfaceInstructionBuilder> for TokenStream {
     fn from(builder: &InterfaceInstructionBuilder) -> Self {
-        let item_enum = &builder.item_enum;
+        let _item_enum = &builder.item_enum;
+        let pack_unpack = &builder.pack_unpack;
         quote! {
-            #item_enum
+            #pack_unpack
         }
     }
 }
@@ -130,12 +131,12 @@ fn extract_interface_from_attribute(
             meta.path.segments[0].ident.to_string(),
             meta.path.segments[1].ident.to_string(),
         );
-        return Ok(());
+        Ok(())
     }) {
-        Ok(_) => return Ok(res),
+        Ok(_) => Ok(res),
         Err(e) => {
             println!("Error parsing interface attribute: {}", e);
-            return Err(SplInterfaceError::ParseError);
+            Err(SplInterfaceError::ParseError)
         }
     }
 }

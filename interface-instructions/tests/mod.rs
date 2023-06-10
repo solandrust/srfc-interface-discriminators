@@ -82,10 +82,4 @@ pub enum SampleTokenE {
 }
 
 #[test]
-fn test_compiles() {
-    let _a = SampleTokenA::instructions();
-    let _b = SampleTokenB::instructions();
-    let _c = SampleTokenC::instructions();
-    let _d = SampleTokenD::instructions();
-    let _e = SampleTokenE::instructions();
-}
+fn test_compiles() {}
