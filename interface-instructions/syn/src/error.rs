@@ -1,5 +1,9 @@
+//! Errors for the SPL interface instruction parser.
+
 #[derive(Clone, Debug, Eq, thiserror::Error, PartialEq)]
 pub enum SplInterfaceError {
+    #[error("Error parsing interface attribute")]
+    ParseError,
     #[error("Invalid interface namespace")]
     InvalidInterfaceNamespace,
     #[error("Instruction not found")]

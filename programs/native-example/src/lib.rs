@@ -12,7 +12,7 @@ use crate::processor::process;
 /// They will also need to derive `InterfaceInstruction` in order to have
 /// access to the custom `unpack(..)` function which can unpack an instruction
 /// that is built with the interface discriminator
-#[interface_instruction]
+#[derive(SplInterfaceInstruction)]
 pub enum SampleProgramInstruction {
     /// This instruction implements the `token` interface's `mint_to`
     /// instruction and will have discriminator `hash(token:mint_to)[..8]`

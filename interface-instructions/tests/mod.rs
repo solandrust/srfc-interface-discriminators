@@ -1,6 +1,7 @@
+use solana_program::pubkey::Pubkey;
 use spl_interface_instructions::*;
 
-#[interface_instruction]
+#[derive(SplInterfaceInstruction)]
 pub enum SampleTokenA {
     #[interface(srfc20_token::mint_to)]
     MintTo { amount: u64 },
@@ -8,7 +9,7 @@ pub enum SampleTokenA {
     Transfer { amount: u64 },
 }
 
-#[interface_instruction]
+#[derive(SplInterfaceInstruction)]
 pub enum SampleTokenB {
     #[interface(srfc22_associated_token::freeze)]
     Freeze,
@@ -16,7 +17,7 @@ pub enum SampleTokenB {
     Thaw,
 }
 
-#[interface_instruction]
+#[derive(SplInterfaceInstruction)]
 pub enum SampleTokenC {
     #[interface(srfc23_token_metadata::create_metadata)]
     CreateMetadata {
@@ -32,7 +33,7 @@ pub enum SampleTokenC {
     },
 }
 
-#[interface_instruction]
+#[derive(SplInterfaceInstruction)]
 pub enum SampleTokenD {
     #[interface(srfc20_token::mint_to)]
     MintTo { amount: u64 },
@@ -44,14 +45,13 @@ pub enum SampleTokenD {
     Freeze,
     #[interface(srfc22_associated_token::thaw)]
     Thaw,
-    #[interface(srfc23_token_metadata::create_metadata)]
     Custom {
         custom_arg_1: Pubkey,
         custom_arg_2: u32,
     },
 }
 
-#[interface_instruction]
+#[derive(SplInterfaceInstruction)]
 pub enum SampleTokenE {
     #[interface(srfc20_token::mint_to)]
     MintTo { amount: u64 },

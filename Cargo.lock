@@ -1589,6 +1589,7 @@ dependencies = [
  "shank",
  "solana-program",
  "spl-associated-token-account",
+ "spl-interface-instructions",
  "spl-token",
  "spl-token-2022",
  "winnow",
@@ -1876,11 +1877,9 @@ dependencies = [
 name = "spl-interface-instructions"
 version = "0.1.0"
 dependencies = [
- "quote",
  "solana-program",
  "spl-interface-instructions-derive",
- "syn 2.0.18",
- "thiserror",
+ "spl-interface-instructions-syn",
 ]
 
 [[package]]
@@ -1890,7 +1889,7 @@ dependencies = [
  "proc-macro2",
  "quote",
  "spl-interface-instructions-syn",
- "syn 1.0.109",
+ "syn 2.0.18",
 ]
 
 [[package]]
@@ -1899,7 +1898,9 @@ version = "0.1.0"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn 1.0.109",
+ "solana-program",
+ "syn 2.0.18",
+ "thiserror",
 ]
 
 [[package]]
