@@ -16,38 +16,24 @@ use crate::processor::process;
 pub enum SampleProgramInstruction {
     /// This instruction implements the `token` interface's `mint_to`
     /// instruction and will have discriminator `hash(token:mint_to)[..8]`
-    #[interface(token::mint_to)]
-    MintTo {
-        amount: u64,
-        custom_arg_1: String,
-        custom_arg_2: u64,
-    },
+    #[interface(srfc20_token::mint_to)]
+    MintTo { amount: u64 },
     /// This instruction implements the `token` interface's `transfer`
     /// instruction and will have discriminator `hash(token:transfer)[..8]`
-    #[interface(token::transfer)]
-    Transfer {
-        this_should_error: u8,
-        custom_arg_1: Pubkey,
-        custom_arg_2: u32,
-    },
+    #[interface(srfc20_token::transfer)]
+    Transfer { amount: u64 },
     /// This instruction implements the `token` interface's `burn`
     /// instruction and will have discriminator `hash(token:burn)[..8]`
-    #[interface(token::burn)]
-    Burn {
-        amount: u64,
-        custom_arg_1: Vec<String>,
-    },
+    #[interface(srfc21_token::burn)]
+    Burn { amount: u64 },
     /// This instruction implements the `associated_token` interface's `freeze`
     /// instruction and will have discriminator `hash(token:freeze)[..8]`
-    #[interface(associated_token::freeze)]
-    Freeze {
-        custom_arg_1: Pubkey,
-        custom_arg_2: u32,
-    },
+    #[interface(srfc22_associated_token::freeze)]
+    Freeze,
     /// This instruction implements the `associated_token` interface's `thaw`
     /// instruction and will have discriminator `hash(token:thaw)[..8]`
-    #[interface(associated_token::thaw)]
-    Thaw { custom_arg_1: Pubkey },
+    #[interface(srfc22_associated_token::thaw)]
+    Thaw,
     Custom {
         custom_arg_1: Pubkey,
         custom_arg_2: u32,

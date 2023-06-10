@@ -18,57 +18,43 @@ use crate::processor::process;
 pub enum SampleProgramInstruction {
     /// This instruction implements the `token` interface's `mint_to`
     /// instruction and will have discriminator `hash(token:mint_to)[..8]`
-    #[interface(token::mint_to)]
+    #[interface(srfc20_token::mint_to)]
     #[account(0, name = "mint")]
     #[account(1, name = "authority")]
     #[account(2, name = "token_program")]
-    MintTo {
-        amount: u64,
-        custom_arg_1: String,
-        custom_arg_2: u64,
-    },
+    MintTo { amount: u64 },
     /// This instruction implements the `token` interface's `transfer`
     /// instruction and will have discriminator `hash(token:transfer)[..8]`
-    #[interface(token::transfer)]
+    #[interface(srfc20_token::transfer)]
     #[account(0, name = "mint")]
     #[account(1, writable, name = "recipient")]
     #[account(2, writable, name = "from")]
     #[account(3, name = "authority")]
     #[account(4, name = "token_program")]
-    Transfer {
-        this_should_error: u8,
-        custom_arg_1: Pubkey,
-        custom_arg_2: u32,
-    },
+    Transfer { amount: u64 },
     /// This instruction implements the `token` interface's `burn`
     /// instruction and will have discriminator `hash(token:burn)[..8]`
-    #[interface(token::burn)]
+    #[interface(srfc21_token::burn)]
     #[account(0, name = "mint")]
     #[account(1, name = "authority")]
     #[account(2, name = "token_program")]
-    Burn {
-        amount: u64,
-        custom_arg_1: Vec<String>,
-    },
+    Burn { amount: u64 },
     /// This instruction implements the `associated_token` interface's `freeze`
     /// instruction and will have discriminator `hash(token:freeze)[..8]`
-    #[interface(associated_token::freeze)]
+    #[interface(srfc22_associated_token::freeze)]
     #[account(0, name = "mint")]
     #[account(1, writable, name = "target")]
     #[account(2, name = "authority")]
     #[account(3, name = "token_program")]
-    Freeze {
-        custom_arg_1: Pubkey,
-        custom_arg_2: u32,
-    },
+    Freeze,
     /// This instruction implements the `associated_token` interface's `thaw`
     /// instruction and will have discriminator `hash(token:thaw)[..8]`
-    #[interface(associated_token::thaw)]
+    #[interface(srfc22_associated_token::thaw)]
     #[account(0, name = "mint")]
     #[account(1, writable, name = "target")]
     #[account(2, name = "authority")]
     #[account(3, name = "token_program")]
-    Thaw { custom_arg_1: Pubkey },
+    Thaw,
     Custom {
         custom_arg_1: Pubkey,
         custom_arg_2: u32,
