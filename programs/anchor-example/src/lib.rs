@@ -1,5 +1,5 @@
 use anchor_lang::prelude::*;
-use anchor_spl::{associated_token, token};
+use anchor_spl::token::{Mint, Token, TokenAccount};
 
 declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
@@ -47,57 +47,50 @@ pub mod anchor_example {
 }
 
 #[derive(Accounts)]
-pub struct MintTo {
+pub struct MintTo<'info> {
     pub mint: Account<'info, Mint>,
     pub authority: Signer<'info>,
     pub token_program: Program<'info, Token>,
 }
 
 #[derive(Accounts)]
-pub struct Transfer {
+pub struct Transfer<'info> {
     pub mint: Account<'info, Mint>,
+    #[account(mut)]
+    pub recipient: Account<'info, TokenAccount>,
     #[account(
         mut,
         associated_token::mint = mint,
+        associated_token::authority = authority,
     )]
-    pub recipient: Account<'info, AssociatedToken>,
-    #[account(
-        mut,
-        associated_token::mint = mint,
-        associated_token::owner = authority,
-    )]
-    pub from: Account<'info, AssociatedToken>,
+    pub from: Account<'info, TokenAccount>,
     pub authority: Signer<'info>,
     pub token_program: Program<'info, Token>,
 }
 
 #[derive(Accounts)]
-pub struct Burn {
+pub struct Burn<'info> {
     pub mint: Account<'info, Mint>,
     pub authority: Signer<'info>,
     pub token_program: Program<'info, Token>,
 }
 
 #[derive(Accounts)]
-pub struct Freeze {
+pub struct Freeze<'info> {
     pub mint: Account<'info, Mint>,
-    #[account(
-        mut,
-        associated_token::mint = mint,
-    )]
-    pub target: Account<'info, AssociatedToken>,
+    #[account(mut)]
+    pub target: Account<'info, TokenAccount>,
+    pub owner: SystemAccount<'info>,
     pub authority: Signer<'info>,
     pub token_program: Program<'info, Token>,
 }
 
 #[derive(Accounts)]
-pub struct Thaw {
+pub struct Thaw<'info> {
     pub mint: Account<'info, Mint>,
-    #[account(
-        mut,
-        associated_token::mint = mint,
-    )]
-    pub target: Account<'info, AssociatedToken>,
+    #[account(mut)]
+    pub target: Account<'info, TokenAccount>,
+    pub owner: SystemAccount<'info>,
     pub authority: Signer<'info>,
     pub token_program: Program<'info, Token>,
 }

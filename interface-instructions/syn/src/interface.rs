@@ -175,6 +175,7 @@ pub fn evaluate_interface_instructions(
     // Make sure all declared interfaces have no remaining unmatched instructions
     for x in declared_interfaces.values() {
         if !x.is_empty() {
+            dump_remaining_interface_instructions(declared_interfaces);
             return Err(SplInterfaceError::InstructionMissing);
         }
     }
@@ -196,10 +197,30 @@ fn process_declared_instruction<I: Interface>(
         None => {
             let mut set = I::instruction_set();
             if !set.remove(&declared_ix) {
+                println!("\n\nFound the following unknown interface instructions:\n");
+                println!(
+                    "  - {}::{}",
+                    declared_ix.interface_namespace, declared_ix.instruction_namespace
+                );
+                println!("\n");
                 return Err(SplInterfaceError::InstructionNotFound);
             }
             declared_interfaces.insert(declared_ix.interface_namespace, set);
         }
     }
     Ok(())
+}
+
+/// Dumps any remaining interface instructions in the evaluation
+/// set for error reporting
+fn dump_remaining_interface_instructions(
+    declared_interfaces: HashMap<String, HashSet<InterfaceInstruction>>,
+) {
+    println!("\n\nThe following interface instructions were not implemented:\n");
+    for (namespace, set) in declared_interfaces {
+        for ix in set {
+            println!("   - {}::{}", namespace, ix.instruction_namespace);
+        }
+    }
+    println!("\n");
 }

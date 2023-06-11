@@ -71,6 +71,160 @@ dependencies = [
 ]
 
 [[package]]
+name = "anchor-attribute-access-control"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "regex",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-attribute-account"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "anyhow",
+ "bs58 0.5.0",
+ "proc-macro2",
+ "quote",
+ "rustversion",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-attribute-constant"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "proc-macro2",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-attribute-error"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-attribute-event"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-attribute-program"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-derive-accounts"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-syn",
+ "anyhow",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-derive-space"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
+]
+
+[[package]]
+name = "anchor-example"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+]
+
+[[package]]
+name = "anchor-lang"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-attribute-access-control",
+ "anchor-attribute-account",
+ "anchor-attribute-constant",
+ "anchor-attribute-error",
+ "anchor-attribute-event",
+ "anchor-attribute-program",
+ "anchor-derive-accounts",
+ "anchor-derive-space",
+ "arrayref",
+ "base64 0.13.1",
+ "bincode",
+ "borsh 0.10.3",
+ "bytemuck",
+ "getrandom 0.2.10",
+ "solana-program",
+ "thiserror",
+]
+
+[[package]]
+name = "anchor-spl"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anchor-lang",
+ "solana-program",
+ "spl-associated-token-account",
+ "spl-token",
+ "spl-token-2022",
+]
+
+[[package]]
+name = "anchor-syn"
+version = "0.28.0"
+source = "git+https://github.com/buffalojoec/anchor?branch=joec/interface-discriminators#e1afcbf71e0f2e10fae14525934a6a68479167b9"
+dependencies = [
+ "anyhow",
+ "bs58 0.5.0",
+ "heck",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "sha2 0.10.6",
+ "syn 1.0.109",
+ "thiserror",
+]
+
+[[package]]
 name = "android-tzdata"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -248,6 +402,12 @@ checksum = "3441f0f7b02788e948e47f457ca01f1d7e6d92c693bc132c22b087d3141c03ff"
 
 [[package]]
 name = "base64"
+version = "0.13.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9e1b586273c5702936fe7b7d6896644d8be71e6314cfe09d3167c95f712589e8"
+
+[[package]]
+name = "base64"
 version = "0.21.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "604178f6c5c21f02dc555784810edfb88d34ac2c73b2eae109655649ee73ce3d"
@@ -412,6 +572,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "771fe0050b883fcc3ea2359b1a96bcfbc090b7116eae7c3c512c7a083fdf23d3"
 
 [[package]]
+name = "bs58"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f5353f36341f7451062466f0b755b96ac3a9547e4d7f6b70d603fc721a7d7896"
+dependencies = [
+ "tinyvec",
+]
+
+[[package]]
 name = "bumpalo"
 version = "3.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -509,9 +678,9 @@ dependencies = [
 
 [[package]]
 name = "constant_time_eq"
-version = "0.2.5"
+version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "13418e745008f7349ec7e449155f419a61b92b58a99cc3616942b926825ec76b"
+checksum = "21a53c0a4d288377e7415b53dcfc3c04da5cdc2cc95c8d5ac178b58f0b861ad6"
 
 [[package]]
 name = "cpufeatures"
@@ -814,6 +983,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "heck"
+version = "0.3.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6d621efb26863f0e9924c6ac577e8275e5e6b77455db64ffa6c65c904e9e132c"
+dependencies = [
+ "unicode-segmentation",
+]
+
+[[package]]
 name = "hermit-abi"
 version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1013,9 +1191,9 @@ dependencies = [
 
 [[package]]
 name = "log"
-version = "0.4.18"
+version = "0.4.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "518ef76f2f87365916b142844c16d8fefd85039bc5699050210a7778ee1cd1de"
+checksum = "b06a4cde4c0f271a446782e3eff8de789548ce57dbc8eca9292c27f4a42004b4"
 
 [[package]]
 name = "memchr"
@@ -1066,14 +1244,11 @@ dependencies = [
 name = "native-example"
 version = "0.1.0"
 dependencies = [
- "borsh 0.9.3",
- "borsh-derive 0.9.3",
+ "borsh 0.10.3",
+ "borsh-derive 0.10.3",
+ "getrandom 0.2.10",
  "solana-program",
- "spl-associated-token-account",
  "spl-interface-instructions",
- "spl-token",
- "spl-token-2022",
- "winnow",
 ]
 
 [[package]]
@@ -1584,15 +1759,12 @@ dependencies = [
 name = "shank-example"
 version = "0.1.0"
 dependencies = [
- "borsh 0.9.3",
- "borsh-derive 0.9.3",
+ "borsh 0.10.3",
+ "borsh-derive 0.10.3",
+ "getrandom 0.2.10",
  "shank",
  "solana-program",
- "spl-associated-token-account",
  "spl-interface-instructions",
- "spl-token",
- "spl-token-2022",
- "winnow",
 ]
 
 [[package]]
@@ -1660,7 +1832,7 @@ dependencies = [
  "ahash 0.8.3",
  "blake3",
  "block-buffer 0.10.4",
- "bs58",
+ "bs58 0.4.0",
  "bv",
  "byteorder",
  "cc",
@@ -1723,7 +1895,7 @@ dependencies = [
  "bitflags",
  "blake3",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.4.0",
  "bv",
  "bytemuck",
  "cc",
@@ -1772,7 +1944,7 @@ dependencies = [
  "bincode",
  "bitflags",
  "borsh 0.10.3",
- "bs58",
+ "bs58 0.4.0",
  "bytemuck",
  "byteorder",
  "chrono",
@@ -1820,7 +1992,7 @@ version = "1.16.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aec66b2d42de3e7a90086ca6ec16f66ac0019bfc3a6ca44ade2404a9dc8c128a"
 dependencies = [
- "bs58",
+ "bs58 0.4.0",
  "proc-macro2",
  "quote",
  "rustversion",
@@ -2059,9 +2231,9 @@ checksum = "5a76a9312f5ba4c2dec6b9161fdf25d87ad8a09256ccea5a556fef03c706a10f"
 
 [[package]]
 name = "toml_edit"
-version = "0.19.8"
+version = "0.19.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "239410c8609e8125456927e6707163a3b1fdb40561e4b803bc041f466ccfdc13"
+checksum = "2380d56e8670370eee6566b0bfd4265f65b3f432e8c6d85623f728d4fa31f739"
 dependencies = [
  "indexmap",
  "toml_datetime",
@@ -2088,6 +2260,12 @@ checksum = "5c5713f0fc4b5db668a2ac63cdb7bb4469d8c9fed047b1d0292cc7b0ce2ba921"
 dependencies = [
  "tinyvec",
 ]
+
+[[package]]
+name = "unicode-segmentation"
+version = "1.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1dd624098567895118886609431a7c3b8f516e41d30e0643f03d94592a147e36"
 
 [[package]]
 name = "universal-hash"
@@ -2281,9 +2459,9 @@ checksum = "1a515f5799fe4961cb532f983ce2b23082366b898e52ffbce459c86f67c8378a"
 
 [[package]]
 name = "winnow"
-version = "0.4.1"
+version = "0.4.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ae8970b36c66498d8ff1d66685dc86b91b29db0c7739899012f63a63814b4b28"
+checksum = "61de7bac303dc551fe038e2b3cef0f571087a47571ea6e79a87692ac99b99699"
 dependencies = [
  "memchr",
 ]

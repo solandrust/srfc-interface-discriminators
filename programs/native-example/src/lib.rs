@@ -1,6 +1,7 @@
 mod processor;
 
-use solana_program::entrypoint;
+use borsh_derive::{BorshDeserialize, BorshSerialize};
+use solana_program::{entrypoint, pubkey::Pubkey};
 use spl_interface_instructions::*;
 
 use crate::processor::process;
@@ -12,7 +13,7 @@ use crate::processor::process;
 /// They will also need to derive `InterfaceInstruction` in order to have
 /// access to the custom `unpack(..)` function which can unpack an instruction
 /// that is built with the interface discriminator
-#[derive(SplInterfaceInstruction)]
+#[derive(BorshDeserialize, BorshSerialize, SplInterfaceInstruction)]
 pub enum SampleProgramInstruction {
     /// This instruction implements the `token` interface's `mint_to`
     /// instruction and will have discriminator `hash(token:mint_to)[..8]`

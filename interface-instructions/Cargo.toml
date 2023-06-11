@@ -7,6 +7,6 @@ edition = "2021"
 crate-type = ["cdylib", "lib"]
 
 [dependencies]
-solana-program = "1.14.12"
+solana-program = ">=1.14, <1.17"
 spl-interface-instructions-derive = { version = "0.1.0", path = "./derive" }
 spl-interface-instructions-syn = { version = "0.1.0", path = "./syn" }

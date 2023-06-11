@@ -43,7 +43,7 @@ impl Parse for InterfaceInstructionBuilder {
         ItemEnum::parse(input)?.try_into().map_err(|e| {
             syn::Error::new(
                 input.span(),
-                format!("Failed to parse interface instruction: {}", e),
+                format!("Failed to parse interface instructions: {}", e),
             )
         })
     }
@@ -78,8 +78,6 @@ pub fn process_functions(functions: Vec<&ItemFn>) -> Result<(), SplInterfaceErro
             if let Ok((interface_namespace, instruction_namespace)) =
                 extract_interface_from_attribute(interface_attr)
             {
-                println!("interface_namespace: {}", interface_namespace);
-                println!("instruction_namespace: {}", instruction_namespace);
                 declared_instructions.push(InterfaceInstruction::from_item_fn(
                     &interface_namespace,
                     &instruction_namespace,
@@ -107,8 +105,6 @@ fn process_variants(
             if let Ok((interface_namespace, instruction_namespace)) =
                 extract_interface_from_attribute(interface_attr)
             {
-                println!("interface_namespace: {}", interface_namespace);
-                println!("instruction_namespace: {}", instruction_namespace);
                 declared_instructions.push(InterfaceInstruction::from_variant(
                     &interface_namespace,
                     &instruction_namespace,
