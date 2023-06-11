@@ -133,6 +133,20 @@ pub enum RequiredArgType {
     Pubkey,
 }
 
+impl std::fmt::Display for RequiredArgType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            RequiredArgType::U8 => write!(f, "u8"),
+            RequiredArgType::U16 => write!(f, "u16"),
+            RequiredArgType::U32 => write!(f, "u32"),
+            RequiredArgType::U64 => write!(f, "u64"),
+            RequiredArgType::U128 => write!(f, "u128"),
+            RequiredArgType::String => write!(f, "String"),
+            RequiredArgType::Pubkey => write!(f, "Pubkey"),
+        }
+    }
+}
+
 impl From<&RequiredArgType> for Type {
     fn from(value: &RequiredArgType) -> Self {
         match value {
@@ -215,13 +229,36 @@ fn process_declared_instruction<I: Interface>(
         None => {
             let mut set = I::instruction_set();
             if !set.remove(&declared_ix) {
-                println!("\n\nFound the following unknown interface instructions:\n");
-                println!(
-                    "  - {}::{}",
-                    declared_ix.interface_namespace, declared_ix.instruction_namespace
-                );
-                println!("\n");
-                return Err(SplInterfaceError::InstructionNotFound);
+                match set
+                    .iter()
+                    .find(|i| &i.instruction_namespace == &declared_ix.instruction_namespace)
+                {
+                    Some(ins) => {
+                        println!(
+                            "\n\nIncorrect arguments for interface instruction `{}::{}`:\n",
+                            declared_ix.interface_namespace, declared_ix.instruction_namespace
+                        );
+                        println!("Provided arguments:");
+                        for arg in &declared_ix.required_args {
+                            println!("  - {}: {}", arg.0, arg.1);
+                        }
+                        println!("\n");
+                        println!("Required arguments:");
+                        for arg in &ins.required_args {
+                            println!("  - {}: {}", arg.0, arg.1);
+                        }
+                        println!("\n");
+                        return Err(SplInterfaceError::MissingArgument);
+                    }
+                    None => {
+                        println!("\n\nFound the following unknown interface instructions:\n");
+                        println!(
+                            "  - {}::{}",
+                            declared_ix.interface_namespace, declared_ix.instruction_namespace
+                        );
+                        return Err(SplInterfaceError::InstructionNotFound);
+                    }
+                }
             }
             declared_interfaces.insert(declared_ix.interface_namespace, set);
         }

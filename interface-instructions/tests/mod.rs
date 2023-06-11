@@ -4,7 +4,7 @@ use spl_interface_instructions::*;
 #[derive(SplInterfaceInstruction)]
 pub enum SampleTokenA {
     #[interface(srfc20_token::mint_to)]
-    MintTo { amount: u64 },
+    Darryl { amount: u64 },
     #[interface(srfc20_token::transfer)]
     Transfer { amount: u64 },
 }

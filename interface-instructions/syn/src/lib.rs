@@ -130,28 +130,32 @@ fn extract_interface_from_attribute(
 /// Generate the pack and unpack implementations for the
 /// instruction enum declared by the program
 fn generate_pack_unpack(item_enum: &ItemEnum) -> TokenStream {
-    let ident = &item_enum.ident;
-    let (unpack_arms, pack_arms) = build_pack_unpack_arms(item_enum);
-    quote! {
-        impl InterfaceInstructionPack for #ident {
-            fn unpack(buf: &[u8]) -> Result<Self, ProgramError> {
-                let (discrim, rest) = buf.split_at(8).ok_or(ProgramError::InvalidInstructionData)?;
-                match discrim {
-                    #(#unpack_arms)*
-                    _ => Err(ProgramError::InvalidInstructionData)
-                }
-            }
-            fn pack<W: std::io::Write>(&self, writer: &mut W) -> Result<(), ProgramError> {
-                match self {
-                    #(#pack_arms)*
-                }
-            }
-        }
-    }
+    // let ident = &item_enum.ident;
+    // let (unpack_arms, pack_arms) = build_pack_unpack_arms(item_enum);
+    // quote! {
+    //     impl InterfaceInstructionPack for #ident {
+    //         fn unpack(buf: &[u8]) -> Result<Self, solana_program::program_error::ProgramError> {
+    //             let (discrim, rest) = buf.split_at(8);
+    //             if discrim.len() < 8 {
+    //                 return Err(solana_program::program_error::ProgramError::InvalidInstructionData);
+    //             }
+    //             match discrim {
+    //                 #(#unpack_arms)*
+    //                 _ => Err(solana_program::program_error::ProgramError::InvalidInstructionData)
+    //             }
+    //         }
+    //         fn pack<W: std::io::Write>(&self, writer: &mut W) -> Result<(), solana_program::program_error::ProgramError> {
+    //             match self {
+    //                 #(#pack_arms)*
+    //             }
+    //         }
+    //     }
+    // }
+    quote! {}
 }
 
 /// Build the pack and unpack arms for the generated tokens
-fn build_pack_unpack_arms(_item_enum: &ItemEnum) -> (Vec<TokenStream>, Vec<TokenStream>) {
+fn build_pack_unpack_arms(item_enum: &ItemEnum) -> (Vec<TokenStream>, Vec<TokenStream>) {
     // TODO
     (vec![quote! {}], vec![quote! {}])
 }
