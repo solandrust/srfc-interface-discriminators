@@ -1,5 +1,5 @@
 [package]
-name = "spl-interface-instructions-syn"
+name = "spl-interface-instructions-registry"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,6 +7,5 @@ edition = "2021"
 proc-macro2 = "1.0.59"
 quote = "1.0"
 solana-program = ">=1.14, <1.17"
-spl-interface-instructions-registry = { version = "0.1.0", path = "../registry" }
 syn = { version = "2.0", features = ["full"] }
 thiserror = "1.0.40"

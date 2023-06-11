@@ -2051,6 +2051,7 @@ version = "0.1.0"
 dependencies = [
  "solana-program",
  "spl-interface-instructions-derive",
+ "spl-interface-instructions-registry",
  "spl-interface-instructions-syn",
 ]
 
@@ -2065,12 +2066,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "spl-interface-instructions-registry"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "solana-program",
+ "syn 2.0.18",
+ "thiserror",
+]
+
+[[package]]
 name = "spl-interface-instructions-syn"
 version = "0.1.0"
 dependencies = [
  "proc-macro2",
  "quote",
  "solana-program",
+ "spl-interface-instructions-registry",
  "syn 2.0.18",
  "thiserror",
 ]

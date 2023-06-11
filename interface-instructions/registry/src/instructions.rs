@@ -1,31 +1,6 @@
 //! Community-defined interfaces from sRFC workflow
 
-use solana_program::program_error::ProgramError;
-
-use crate::interface::{Interface, InterfaceInstruction, RequiredArgType};
-
-pub trait InterfaceInstructionPack<'a>: Sized {
-    fn unpack(buf: &[u8]) -> Result<Self, ProgramError> {
-        let mut discriminator_registry = vec![];
-        discriminator_registry.extend(SRFC20::instructions().iter().map(|i| i.discriminator()));
-        discriminator_registry.extend(SRFC21::instructions().iter().map(|i| i.discriminator()));
-        discriminator_registry.extend(SRFC22::instructions().iter().map(|i| i.discriminator()));
-        discriminator_registry.extend(SRFC23::instructions().iter().map(|i| i.discriminator()));
-        // Match the provided discriminator to the proper interface instruction
-        let provided_discrminator = buf.get(..8).ok_or(ProgramError::InvalidInstructionData)?;
-        for discriminator in discriminator_registry {
-            if provided_discrminator == discriminator {
-                // Unpack rest
-            }
-        }
-        Err(ProgramError::InvalidInstructionData)
-    }
-
-    fn pack<W: std::io::Write>(&'a self, _writer: &mut W) -> Result<(), ProgramError> {
-        // TODO
-        Ok(())
-    }
-}
+use crate::{Interface, InterfaceInstruction, RequiredArgType};
 
 /// The sRFC 20 Token Interface
 pub struct SRFC20 {}

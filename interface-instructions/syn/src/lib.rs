@@ -1,19 +1,12 @@
 //! `syn` parsing crate for validating and implementing the
 //! necessary components for Solana program interface implementations
 
-mod error;
-mod instructions;
-mod interface;
-
-use error::SplInterfaceError;
-use interface::evaluate_interface_instructions;
 use proc_macro2::TokenStream;
 use quote::{quote, ToTokens};
-use syn::{
-    parse::Parse, punctuated::Punctuated, token::Comma, Attribute, ItemEnum, ItemFn, Variant,
+use spl_interface_instructions_registry::{
+    error::SplInterfaceError, evaluate_interface_instructions, InterfaceInstruction,
 };
-
-use crate::interface::InterfaceInstruction;
+use syn::{parse::Parse, Attribute, ItemEnum, ItemFn};
 
 /// "Builder" struct for the macro attribute that will run
 /// the necessary checks and then generate the necessary
@@ -29,8 +22,7 @@ impl TryFrom<ItemEnum> for InterfaceInstructionBuilder {
     type Error = SplInterfaceError;
 
     fn try_from(item_enum: ItemEnum) -> Result<Self, Self::Error> {
-        let variants = &item_enum.variants;
-        let pack_unpack = process_variants(variants)?;
+        let pack_unpack = process_enum(&item_enum)?;
         Ok(Self {
             item_enum,
             pack_unpack,
@@ -89,14 +81,12 @@ pub fn process_functions(functions: Vec<&ItemFn>) -> Result<(), SplInterfaceErro
     evaluate_interface_instructions(declared_instructions)
 }
 
-/// Validate the interface instructions from a collection of
-/// enum variants and implement the required
+/// Validate the interface instructions from a defined
+/// instruction enum and implement the required
 /// traits (Native, Shank)
-fn process_variants(
-    variants: &Punctuated<Variant, Comma>,
-) -> Result<TokenStream, SplInterfaceError> {
+fn process_enum(item_enum: &ItemEnum) -> Result<TokenStream, SplInterfaceError> {
     let mut declared_instructions = vec![];
-    for variant in variants {
+    for variant in &item_enum.variants {
         if let Some(interface_attr) = variant
             .attrs
             .iter()
@@ -113,7 +103,7 @@ fn process_variants(
             }
         }
     }
-    evaluate_interface_instructions(declared_instructions).map(|_| generate_pack_unpack())
+    evaluate_interface_instructions(declared_instructions).map(|_| generate_pack_unpack(item_enum))
 }
 
 /// Extracts the interface namespace and instruction namespace
@@ -137,7 +127,31 @@ fn extract_interface_from_attribute(
     }
 }
 
-fn generate_pack_unpack() -> TokenStream {
+/// Generate the pack and unpack implementations for the
+/// instruction enum declared by the program
+fn generate_pack_unpack(item_enum: &ItemEnum) -> TokenStream {
+    let ident = &item_enum.ident;
+    let (unpack_arms, pack_arms) = build_pack_unpack_arms(item_enum);
+    quote! {
+        impl InterfaceInstructionPack for #ident {
+            fn unpack(buf: &[u8]) -> Result<Self, ProgramError> {
+                let (discrim, rest) = buf.split_at(8).ok_or(ProgramError::InvalidInstructionData)?;
+                match discrim {
+                    #(#unpack_arms)*
+                    _ => Err(ProgramError::InvalidInstructionData)
+                }
+            }
+            fn pack<W: std::io::Write>(&self, writer: &mut W) -> Result<(), ProgramError> {
+                match self {
+                    #(#pack_arms)*
+                }
+            }
+        }
+    }
+}
+
+/// Build the pack and unpack arms for the generated tokens
+fn build_pack_unpack_arms(_item_enum: &ItemEnum) -> (Vec<TokenStream>, Vec<TokenStream>) {
     // TODO
-    quote! {}
+    (vec![quote! {}], vec![quote! {}])
 }

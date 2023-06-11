@@ -1,12 +1,30 @@
-//! Defines the `Interface` trait and related types and checks,
-//! including the implementation of `pack(..)` and `unpack(..)`
-//! for native and Shank programs
+//! Crate defining the `Interface` trait and related types
+//! and checks.
+//!
+//! Also provides the collection of currently accepted
+//! sRFC interfaces
 
+pub mod error;
+pub mod instructions;
+
+use solana_program::program_error::ProgramError;
 use std::collections::{HashMap, HashSet};
 use syn::{parse_quote, ItemFn, Type, Variant};
 
-use crate::error::SplInterfaceError;
-use crate::instructions::*;
+use error::SplInterfaceError;
+use instructions::*;
+
+/// Trait for implementing Shank & Native programs to
+/// build a processor
+///
+/// The derive macro `#[derive(SplInterfaceInstruction)]`
+/// will implement this trait for you
+pub trait InterfaceInstructionPack: Sized {
+    /// Unpacks an instruction from a buffer
+    fn unpack(buf: &[u8]) -> Result<Self, ProgramError>;
+    /// Packs an instruction into a buffer
+    fn pack<W: std::io::Write>(&self, writer: &mut W) -> Result<(), ProgramError>;
+}
 
 /// Trait defining a Solana program interface
 pub trait Interface {

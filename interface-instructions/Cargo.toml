@@ -9,4 +9,5 @@ crate-type = ["cdylib", "lib"]
 [dependencies]
 solana-program = ">=1.14, <1.17"
 spl-interface-instructions-derive = { version = "0.1.0", path = "./derive" }
+spl-interface-instructions-registry = { version = "0.1.0", path = "./registry" }
 spl-interface-instructions-syn = { version = "0.1.0", path = "./syn" }
